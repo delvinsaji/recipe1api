@@ -130,7 +130,7 @@ def delete_review(request,pk):
 def create_user(request):
   user = User.objects.get(username = request.data['username'])
   if user is not None:
-    return Response("The user already exists")s
+    return Response("The user already exists")
 
   user = User.objects.create_user(username = request.data['username'])
   user.set_password(request.data['password'])

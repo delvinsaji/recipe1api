@@ -16,5 +16,6 @@ urlpatterns = [
   path("get_recipe_review/<str:pk>/",views.get_recipe_reviews,name = "Get Reviews"),
   path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
   path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-  path("delete_review/<str:pk>/",views.delete_review,name = "Delete Review")
+  path("delete_review/<str:pk>/",views.delete_review,name = "Delete Review"),
+  path("create_user/",views.create_user,name = "Create User")
 ]
