@@ -30,7 +30,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = Recipe
-    fields = ["id","name","prep",'ingredients']
+    fields = ["id","name","prep",'ingredients','reviews']
 
   def get_ingredients(self,rec):
     ingredients = Ingredients.objects.filter(recipe = rec)
