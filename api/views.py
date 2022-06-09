@@ -128,8 +128,11 @@ def delete_review(request,pk):
 
 @api_view(['POST'])
 def create_user(request): 
-  if User.objects.get(username = request.data['username']) is not None:
-    return Response("The user already exists")
+  try:
+    if User.objects.get(username = request.data['username']) is not None:
+      return Response("The user already exists")
+  except:
+    pass
 
   user = User.objects.create_user(username = request.data['username'])
   user.set_password(request.data['password'])
