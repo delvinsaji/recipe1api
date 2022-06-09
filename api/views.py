@@ -137,5 +137,6 @@ def create_user(request):
   user.save()
 
   profile = Profile.objects.create(name = request.data['name'],user = user)
+  profile.save()
 
   return Response("User created")
