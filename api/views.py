@@ -29,9 +29,11 @@ def get_indi_recipe(request,pk):
 
 @api_view(['POST'])
 def create_recipe(request):
-  if Recipe.objects.get(name = request.data['name']) is not None:
-    return Response("The Recipe already exists")
-
+  try:
+    if Recipe.objects.get(name = request.data['name']) is not None:
+      return Response("The Recipe already exists")
+  except:
+    pass
   recipe = Recipe.objects.create(name = request.data['name'],prep = request.data['prep'])
   recipe.save()
 
