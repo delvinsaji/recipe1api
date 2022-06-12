@@ -61,6 +61,7 @@ def delete_recipe(request,pk):
 
 @api_view(['POST'])
 def update_recipe(request,pk):
+  print(request.data)
   recipe = Recipe.objects.get(name = pk)
 
   if request.data['name'] != "":
@@ -101,14 +102,16 @@ def get_recipe_reviews(request,pk):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def add_review(request,pk):
-  review = Reviews.objects.get(owner = Profile.objects.get(user = User.objects.get(username = request.data['username'])),
-                                  recipe = Recipe.objects.get(name = pk))
+  try:
+    review = Reviews.objects.get(owner = Profile.objects.get(user = User.objects.get(username = request.data['username'])),
+                                    recipe = Recipe.objects.get(name = pk))
 
-  if review is not None:
-    return Response("Review already exists")
-
+    if review is not None:
+      return Response("Review already exists")
+  except:
+    pass
+  
   review = Reviews.objects.create(owner = Profile.objects.get(user = User.objects.get(username = request.data['username'])),
                                   recipe = Recipe.objects.get(name = pk),
                                   desc = request.data['desc'],
